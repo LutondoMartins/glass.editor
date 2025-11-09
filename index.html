@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Text Editor - Glassmorphic</title>
+    
+     <!-- Tailwind CSS  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+     <!-- Bootstrap CSS  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+     <!-- Lucide Icons  -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+     <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+     <!-- Custom Styles  -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 bg-[#0A0A0A] relative">
+    
+     <!-- Animated Background  -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20"></div>
+        
+         <!-- Floating orbs with glassmorphism  -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        
+         <!-- Static gradient mesh  -->
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-purple-600/20 via-transparent to-blue-600/20"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-pink-600/20 via-transparent to-cyan-600/20"></div>
+        </div>
+        
+         <!-- Subtle noise texture  -->
+        <div class="absolute inset-0 opacity-[0.02] bg-noise"></div>
+    </div>
+
+     <!-- Editor Container  -->
+    <div class="w-full max-w-4xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl shadow-black/40 overflow-hidden relative z-10">
+         <!-- Subtle inner glow  -->
+        <div class="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-purple-500/5 rounded-3xl pointer-events-none"></div>
+        
+         <!-- Toolbar  -->
+        <div class="flex items-center gap-2 p-6 bg-white/5 backdrop-blur-xl border-b border-white/10 relative flex-wrap">
+            <div class="flex items-center gap-1">
+                <div class="flex items-center gap-2 mr-4">
+                    <div class="p-2 bg-purple-500/20 backdrop-blur-sm rounded-xl border border-purple-400/30">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-purple-300"></i>
+                    </div>
+                    <span class="text-sm font-semibold text-white/90">Rich Editor</span>
+                </div>
+
+                <button class="toolbar-btn" data-command="formatBlock" data-value="h1" title="Heading 1">
+                    <i data-lucide="heading-1" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="formatBlock" data-value="h2" title="Heading 2">
+                    <i data-lucide="heading-2" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="formatBlock" data-value="h3" title="Heading 3">
+                    <i data-lucide="heading-3" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="h-6 w-px mx-3 bg-white/20"></div>
+
+            <div class="flex items-center gap-1">
+                <button class="toolbar-btn" data-command="bold" title="Bold (Ctrl+B)">
+                    <i data-lucide="bold" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="italic" title="Italic (Ctrl+I)">
+                    <i data-lucide="italic" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="underline" title="Underline (Ctrl+U)">
+                    <i data-lucide="underline" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="h-6 w-px mx-3 bg-white/20"></div>
+
+            <div class="flex items-center gap-1">
+                <button class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">
+                    <i data-lucide="list" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">
+                    <i data-lucide="list-ordered" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Quote">
+                    <i data-lucide="quote" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="h-6 w-px mx-3 bg-white/20"></div>
+
+            <div class="flex items-center gap-1">
+                <button class="toolbar-btn" data-command="justifyLeft" title="Align Left">
+                    <i data-lucide="align-left" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="justifyCenter" title="Align Center">
+                    <i data-lucide="align-center" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="justifyRight" title="Align Right">
+                    <i data-lucide="align-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="h-6 w-px mx-3 bg-white/20"></div>
+
+            <div class="flex items-center gap-1">
+                <button class="toolbar-btn" id="insertLink" title="Insert Link">
+                    <i data-lucide="link-2" class="w-4 h-4"></i>
+                </button>
+                <button class="toolbar-btn" data-command="formatBlock" data-value="pre" title="Code Block">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+         <!-- Editor Area  -->
+        <div class="relative">
+            <div 
+                id="editor" 
+                contenteditable="true" 
+                class="editor-content"
+                data-placeholder="Start writing something amazing..."
+            ></div>
+        </div>
+
+         <!-- Footer Stats  -->
+        <div class="flex items-center justify-between px-8 py-6 bg-white/5 backdrop-blur-xl border-t border-white/10 text-sm text-white/60 relative flex-wrap gap-4">
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="type" class="w-4 h-4 text-purple-300"></i>
+                    Words: <span id="wordCount" class="text-white/90 font-medium">0</span>
+                </span>
+                <span class="flex items-center gap-2">
+                    Characters: <span id="charCount" class="text-white/90 font-medium">0</span>
+                </span>
+            </div>
+            <div class="text-xs text-white/50 flex items-center gap-3">
+                <kbd class="px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-xs border border-white/20">⌘B</kbd>
+                <span>Bold</span>
+                <kbd class="px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-xs border border-white/20">⌘I</kbd>
+                <span>Italic</span>
+                <kbd class="px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-xs border border-white/20">⌘U</kbd>
+                <span>Underline</span>
+            </div>
+        </div>
+    </div>
+
+     <!-- Bootstrap JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+     <!-- Custom Script  -->
+    <script src="script.js"></script>
+    
+     <!-- Initialize Lucide Icons  -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Toolbar Button Styles */
+.toolbar-btn {
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.2);
+  transform: scale(1.05);
+}
+
+.toolbar-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
+}
+
+.toolbar-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.toolbar-btn.active {
+  background: rgba(147, 51, 234, 0.3);
+  color: white;
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+}
+
+/* Editor Content Styles */
+.editor-content {
+  min-height: 500px;
+  padding: 2rem;
+  outline: none;
+  position: relative;
+  z-index: 10;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+}
+
+.editor-content:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  position: absolute;
+}
+
+.editor-content::selection,
+.editor-content *::selection {
+  background: rgba(147, 51, 234, 0.3);
+  color: white;
+}
+
+/* Typography Styles */
+.editor-content h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+}
+
+.editor-content h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.editor-content h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.editor-content p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.editor-content ul,
+.editor-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.editor-content li {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.editor-content blockquote {
+  border-left: 4px solid rgb(168, 85, 247);
+  padding-left: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(147, 51, 234, 0.1);
+  backdrop-filter: blur(4px);
+  border-radius: 0 12px 12px 0;
+  margin: 1.5rem 0;
+}
+
+.editor-content pre {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-family: "Courier New", monospace;
+  font-size: 0.875rem;
+  color: rgb(134, 239, 172);
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
+}
+
+.editor-content code {
+  background: rgba(147, 51, 234, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: "Courier New", monospace;
+  color: rgb(216, 180, 254);
+}
+
+.editor-content a {
+  color: rgb(216, 180, 254);
+  text-decoration: underline;
+  text-decoration-color: rgba(216, 180, 254, 0.5);
+  text-underline-offset: 2px;
+  transition: all 0.3s ease;
+}
+
+.editor-content a:hover {
+  text-decoration-color: rgb(216, 180, 254);
+}
+
+/* Background Noise Effect */
+.bg-noise {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Custom Scrollbar */
+.editor-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editor-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.editor-content::-webkit-scrollbar-thumb {
+  background: rgba(147, 51, 234, 0.5);
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+}
+
+.editor-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 51, 234, 0.7);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .editor-content {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .toolbar-btn {
+    height: 32px;
+    width: 32px;
+  }
+}
